@@ -1,24 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import {useDispatch,useSelector} from 'react-redux';
+import { getuserid } from './actioncreator';
+
 
 function App() {
+//2. Hook Area
+let dispatch=useDispatch();
+
+  /*let storeObjectData=useSelector((store)=>{return store});
+    
+      sorted form
+  */
+  let storeObjectData=useSelector(store=>store);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {
+      console.log(storeObjectData)
+    }
+      <button onClick={()=>{dispatch(getuserid())}}>Call the API</button>
+      <ul>
+        {
+          storeObjectData && storeObjectData.map((cv,idx,arr)=>{
+            return <li>{cv.id}</li>
+          })
+        }
+      </ul>
+    </>
   );
 }
 
